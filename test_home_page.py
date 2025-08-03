@@ -1,13 +1,8 @@
-from selenium import webdriver
 
-
-def test_verify_page_title():
+def test_verify_page_title(driver):
     """
     Este teste abre o site demoqa.com e verifica o título da página.
     """
-    # Inicializa o driver do Chrome
-    # driver = webdriver.Chrome()
-    driver = webdriver.Firefox()
 
     # Abre a URL
     driver.get("https://demoqa.com")
