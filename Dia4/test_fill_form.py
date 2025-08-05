@@ -33,11 +33,14 @@ def test_fill_form_and_validate_output(driver):
     time.sleep(3)
     permanent_address = "Avenida Conselheiro Aguiar, s/n"
     permanent_address_input.send_keys(permanent_address)
+
     
     
     # # Clica no botão de submit
     driver.execute_script("arguments[0].scrollIntoView(true);", submit_button)
     submit_button.click()
+
+    time.sleep(5)
     
     # # Valida a saída
     output_name = driver.find_element(By.ID, "name")
