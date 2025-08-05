@@ -10,8 +10,6 @@ def test_fill_form_and_validate_output(driver):
     assert text_box.is_displayed()
     text_box.click()
 
-    # time.sleep(5)
-
     # # Mapeia os elementos do formulário
     full_name_input = driver.find_element(By.ID, "userName")
     email_input = driver.find_element(By.ID, "userEmail")
@@ -30,17 +28,26 @@ def test_fill_form_and_validate_output(driver):
     email_input.send_keys(email)
     current_address_input.send_keys(current_address)
     permanent_address_input.send_keys(permanent_address)
+    time.sleep(2)
+    permanent_address_input.clear()
+    time.sleep(3)
+    permanent_address = "Avenida Conselheiro Aguiar, s/n"
+    permanent_address_input.send_keys(permanent_address)
+
     
     
     # # Clica no botão de submit
     driver.execute_script("arguments[0].scrollIntoView(true);", submit_button)
     submit_button.click()
+
     time.sleep(5)
+    
     # # Valida a saída
     output_name = driver.find_element(By.ID, "name")
     output_email = driver.find_element(By.ID, "email")
     output_current_address = driver.find_element(By.CSS_SELECTOR, "p#currentAddress")
     output_permanent_address = driver.find_element(By.CSS_SELECTOR, "p#permanentAddress")
+
 
     assert full_name in output_name.text
     assert email in output_email.text
