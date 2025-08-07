@@ -6,8 +6,8 @@ def driver():
     """
     Fixture que inicializa e finaliza o WebDriver para cada teste.
     """
-    # instance = webdriver.Chrome()
-    instance = webdriver.Firefox()
+    instance = webdriver.Chrome()
+    # instance = webdriver.Firefox()
 
     yield instance
 
