@@ -1,7 +1,5 @@
 from pages.text_box_page import TextBoxPage
-import pytest
 
-@pytest.mark.elements
 def test_fill_text_box_form(driver):
     text_box_page = TextBoxPage(driver)
     text_box_page.navigate()
