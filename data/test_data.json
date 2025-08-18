@@ -1,0 +1,5 @@
+{
+  "tool_tips_url": "https://demoqa.com/tool-tips",
+  "expected_button_tooltip": "You hovered over the Button",
+  "expected_input_tooltip": "You hovered over the text field"
+}
