@@ -1,0 +1,4 @@
+
+[INFO] Initializing chrome driver...
+
+[INFO] Test on chrome finished in 16.69 seconds.

@@ -2,6 +2,7 @@ import pytest
 from selenium import webdriver
 import time
 import json
+import pytest_html
 
 # @pytest.fixture
 # def driver():
@@ -42,7 +43,7 @@ def driver(request):
 
     end_time = time.time()
     duration = end_time - start_time
-    
+
     print(f"\n[INFO] Test on {browser_name} finished in {duration:.2f} seconds.")
     instance.quit()
 
@@ -52,3 +53,23 @@ def test_data():
     with open('data/test_data.json', 'r') as f:
         data = json.load(f)
     return data
+
+
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    # Executa todos os outros hooks para obter o objeto de relatório
+    outcome = yield
+    report = outcome.get_result()
+
+    # Anexa informações extras ao relatório
+    extra = getattr(report, "extra", [])
+    if report.when == "call":
+        # Pega a fixture 'driver' do item de teste, se disponível
+        driver = item.funcargs.get('driver')
+        if driver is not None and report.failed:
+            # Captura a screenshot e a codifica em base64
+            screenshot = driver.get_screenshot_as_base64()
+            # Adiciona a screenshot ao relatório HTML
+            extra.append(pytest_html.extras.image(screenshot, 'Screenshot'))
+        report.extra = extra
